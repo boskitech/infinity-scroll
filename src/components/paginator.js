@@ -1,8 +1,20 @@
 import React from 'react'
 
-const paginator = () => {
+const paginator = ({ordersPerPage, totalOrders, paginate}) => {
+    const pageNumbers = []
+
+    for(let i=1; i<= Math.ceil(totalOrders/ordersPerPage); i++){
+        pageNumbers.push(i);
+    }
+
   return (
-    <div>paginator</div>
+    <div>
+        {pageNumbers.map(number => (
+            <button onClick={() => paginate(number)} key={number}>
+                {number}
+            </button>
+        ))}
+    </div>
   )
 }
 
