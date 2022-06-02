@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios'
+import {useState, useEffect} from 'react'
+import Page from './components/page'
 
 function App() {
+
+  const [orders, setOrders] = useState([])
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const response = await axios.get('https://shoppeefy.herokuapp.com/api/orders/')
+      setOrders(response.data)
+    }
+
+    fetchOrders()
+  },[])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Page orders={orders}/>
     </div>
   );
 }
